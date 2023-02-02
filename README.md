@@ -29,6 +29,7 @@ Speaking of which.
 #Code
 There’s a limitation with AFR, it can analyze multipage forms, but it can’t analyze the same form collated multiple times inside the same document.  And that’s exactly how I get the product catalog.  So, to automate the whole data input process (the annoying transcription of the PDF file to an Excel file) I decided to do some stuff with Python. 
 I’m more of a T-SQL, MDX, DAX guy, so I was looking forward to working with Python and some APIs and launched my VSCode to get my hands dirty.  The first time I worked with AFR a couple of years ago I used Postman to make sure that I got the APIs calls right.  I did that again this time since I am using a newer version of the service.  Besides, Postman has a very handy feature that auto creates code snippets in different languages.  This greatly reduced the amount of time I spent on VSCode. 
+
 ![Postman Screenshot](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/postman.png) 
 
 I’ll give you the GitHub repository, but first let me take you for a spin on what I did.
