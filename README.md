@@ -20,16 +20,20 @@ On the same image I used my mouse to select the text “Equilibrium collab Toppl
 You might guess that depending on the complexity of your document and the number of documents used to train is how much time you will spend on this activity.  In my case, considering just six labels I spent around 15 to 20 minutes to label the documents.
 After that I clicked on “Train” on the upper right of the screen, the model started training and after a short while – maybe 5 or 10 minutes – I got my new model.
 ![Azure Form Recognizer Models](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/AFR%20models.png) 
+
 From there you can test your model
 ![Azure Form Recognizer Test Model](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/AFR%20test.png) 
+
 You can get a good idea of how effective it is.  Part of the functionality of the service is to provide you with a certainty value.  On the image above you can see on the far-right side what the model discovered and how sure it is that he is correct.  Right now, my model is fluctuating between the low 70s to high 80s percent.  It is not a perfect model, it can be improved with more samples and further training, but I’ll take it for now.  Later I can retrain it and replace the existing one without breaking my code.
 Speaking of which.
 #Code
 There’s a limitation with AFR, it can analyze multipage forms, but it can’t analyze the same form collated multiple times inside the same document.  And that’s exactly how I get the product catalog.  So, to automate the whole data input process (the annoying transcription of the PDF file to an Excel file) I decided to do some stuff with Python. 
-I’m more of a T-SQL, MDX, DAX guy, so I was looking forward to working with Python and some APIs and launched my VSCode to get my hands dirty.  The first time I worked with AFR a couple of years ago I used Postman to make sure that I got the APIs calls right.  I did that again this time since I am using a newer version of the service.  Besides, Postman has a very handy feature that auto creates code snippets in different languages.  This greatly reduced the amount of time I spent on VSCode.  
+I’m more of a T-SQL, MDX, DAX guy, so I was looking forward to working with Python and some APIs and launched my VSCode to get my hands dirty.  The first time I worked with AFR a couple of years ago I used Postman to make sure that I got the APIs calls right.  I did that again this time since I am using a newer version of the service.  Besides, Postman has a very handy feature that auto creates code snippets in different languages.  This greatly reduced the amount of time I spent on VSCode. 
 ![Postman Screenshot](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/postman.png) 
+
 I’ll give you the GitHub repository, but first let me take you for a spin on what I did.
 ![Visual Studio Code 1](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/code%201.png) 
+
 I used PyPDF to help me split the original catalog into individual documents to be able to analyze each one.  After that I defined two different functions – Inference and GetInference – the way AFR works is asynchronous, so you request a document to be analyzed and then you come back for the results.
 So, the first function, “Inference” receives as a parameter the filepath (in this case a PDF file) and uses the API endpoint, key and defines the headers.  We fire up the API call and we get back a request id.  We will use this request id in the next function “GetInference” to come back and retrieve the result of the analysis.  
 I introduced an artificial delay on this API call since, as mentioned above, the whole analyzing and data gathering is asynchronous.  After getting the response I drop it in a Pandas DataFrame and scrub it up a bit.
@@ -38,6 +42,7 @@ Finally, call the functions looping through all the different files created duri
 
 In conclusion, after fooling around a bit with Python to split the pdf file and testing the AFR the results are exactly what is expected, no longer transcribing the whole product catalog. Neat.  :D 
 ![Excel Results Sample](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/excel%20results.png)
+
 ![Catalog Sample vs Excel 1](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/results%20samples%201.png) ![Catalog Sample vs Excel 2](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/results%20samples%202.png) ![Catalog Sample vs Excel 3](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/results%20samples%203.png) 
    
 
