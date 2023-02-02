@@ -2,8 +2,8 @@
 I am a craft beer enthusiast and love to sample new beers (especially West Coast IPAs, Lagers and Saisons).  A while ago some friends and I found a guy that distributes craft beer mainly from California.  How we order is quite simple, we send a request for information and this guy sends us a PDF file with what’s in stock.  I was appointed as the official transcriber.  It is my duty to transcribe the catalog to an Excel file.  Everyone fills out what beer they want on the Excel file and then we place the order, we pay, and after a couple of days there’s always something new in my fridge.
 At first, I gladly fulfilled my appointed duty, but after a couple of months I found it extremely tedious to perform this monotonous and repetitive task.  That’s when I remembered that a while ago, I helped a retail customer to automate how he ingested the general nutrition facts labels into his product catalog using Azure Form Recognizer (AFR for short).  Since our beer provider always uses the same PDF file format it made complete sense to use AFR again, only that this time I would need to get my hands dirtier writing some code in python.
 Here is a look at how a product description looks like in the product catalog shared by our provider.
- 
- ![Sample Catalog](img/sample catalog.png)
+
+![Sample Catalog](https://github.com/ElPilot13/AFR-BeerSample/blob/main/img/sample%20catalog.png)
 
 I fired up my AFR resource and my first big surprise is that they have a few more prebuilt models into it.  They used to have receipts and business cards, but there are now prebuilt models for invoices, contracts, vaccination cards, and more.  Obviously, the ability to build your own model is still there.
 My second, and greatest surprise, is that we now have an AFR Studio!  Previously we relied on a sample opensource app built on TypeScript that some hero developer(s) created.  You could use the sample app online (not knowing if some change on it will break your project) or download the code and execute it locally on your infrastructure.
